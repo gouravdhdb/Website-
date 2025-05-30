@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tap the Circle - Fun Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #74ebd5, #9face6);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      text-align: center;
+    }
+
+    #box {
+      width: 100px;
+      height: 100px;
+      background-color: white;
+      color: #555;
+      font-size: 20px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      position: absolute;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #score, #timer, #highScore {
+      font-size: 22px;
+      margin: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #5e60ce;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #5e60ce;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tap the Circle!</h1>
+  <div id="score">Score: 0</div>
+  <div id="highScore">High Score: 0</div>
+  <div id="timer">Time: 20s</div>
+  <button onclick="startGame()">Start Game</button>
+  <div id="box" style="display:none;">TAP</div>
+
+  <audio id="tapSound" src="https://www.soundjay.com/button/sounds/button-16.mp3"></audio>
+
+  <script>
+    let score = 0;
+    let timeLeft = 20;
+    let gameInterval, timerInterval;
+    const box = document.getElementById('box');
+    const tapSound = document.getElementById('tapSound');
+
+    // Load high score from localStorage
+    let highScore = localStorage.getItem('tapGameHighScore') || 0;
+    document.getElementById('highScore').textContent = 'High Score: ' + highScore;
+
+    function moveBox() {
+      const maxX = window.innerWidth - 100;
+      const maxY = window.innerHeight - 100;
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+      box.style.left = x + 'px';
+      box.style.top = y + 'px';
+    }
+
+    box.addEventListener('click', () => {
+      if (!gameInterval) return;
+      score++;
+      tapSound.play();
+      document.getElementById('score').textContent = 'Score: ' + score;
+      moveBox();
+    });
+
+    function startGame() {
+      score = 0;
+      timeLeft = 20;
+      document.getElementById('score').textContent = 'Score: 0';
+      document.getElementById('timer').textContent = 'Time: 20s';
+      box.style.display = 'flex';
+      moveBox();
+
+      clearInterval(gameInterval);
+      clearInterval(timerInterval);
+
+      gameInterval = setInterval(moveBox, 1000);
+
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = 'Time: ' + timeLeft + 's';
+        if (timeLeft <= 0) {
+          clearInterval(gameInterval);
+          clearInterval(timerInterval);
+          box.style.display = 'none';
+
+          // Check for high score
+          if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('tapGameHighScore', highScore);
+            document.getElementById('highScore').textContent = 'High Score: ' + highScore;
+            alert('New High Score! Your score: ' + score);
+          } else {
+            alert('Game Over! Your score: ' + score);
+          }
+        }
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
