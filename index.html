@@ -35,6 +35,21 @@
   </head>
   <button class="theme-toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
   <body style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white;">
+  <script>
+  function toggleTheme() {
+    const body = document.body;
+    if (body.classList.contains('dark-theme')) {
+      body.classList.remove('dark-theme');
+      body.classList.add('light-theme');
+    } else {
+      body.classList.remove('light-theme');
+      body.classList.add('dark-theme');
+    }
+  }
+
+  // Optional: set default theme
+  document.body.classList.add('dark-theme');
+  </script>
   </body>
   <body>
     <br>
