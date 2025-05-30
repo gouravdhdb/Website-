@@ -74,7 +74,7 @@
     const themes = ['light-theme', 'dark-theme', 'gamer-theme'];
     const icons = ['🌞 Theme', '🌙 Theme', '🧪 Theme'];
     let currentThemeIndex = 1;
-
+    
     function toggleTheme() {
       document.body.classList.remove(themes[currentThemeIndex]);
       currentThemeIndex = (currentThemeIndex + 1) % themes.length;
