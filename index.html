@@ -26,14 +26,12 @@
       color: white;
     }
 
-    /* Cyberpunk Theme */
-    body.cyberpunk-theme {
-      background: linear-gradient(to right, #ff0080, #7928ca);
-      color: #00ffe7;
-      font-family: 'Courier New', Courier, monospace;
+    /* Custom Gamer Theme (Your Gradient) */
+    body.gamer-theme {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: white;
     }
 
-    /* Toggle Button */
     .theme-toggle-btn {
       position: fixed;
       top: 20px;
@@ -67,7 +65,7 @@
 
   <!-- Theme Script -->
   <script>
-    const themes = ['light-theme', 'dark-theme', 'cyberpunk-theme'];
+    const themes = ['light-theme', 'dark-theme', 'gamer-theme'];
     const icons = ['🌞 Theme', '🌙 Theme', '🧪 Theme'];
     let currentThemeIndex = 1;
 
@@ -84,7 +82,6 @@
       btn.innerHTML = icons[currentThemeIndex];
     }
 
-    // Load saved theme on page load
     window.onload = function () {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme && themes.includes(savedTheme)) {
