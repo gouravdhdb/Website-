@@ -6,171 +6,7 @@
   <title>Decken Gamer</title>
 
   <style>
-    * {
-      transition: background 0.5s ease, color 0.5s ease;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    .center-text {
-      text-align: center;
-    }
-
-    /* Themes */
-    body.light-theme { background: #ffffff; color: #000000; }
-    body.dark-theme { background: linear-gradient(to right, #1f4037, #99f2c8); color: white; }
-    body.gamer-theme { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; }
-
-    .theme-toggle-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 10px;
-      background: #222;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    /* Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: #111;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      z-index: 999;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-
-    .navbar a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    /* Header Section */
-    .header {
-      padding-top: 80px;
-      text-align: center;
-    }
-
-    #typing-text {
-      font-size: 22px;
-      margin-top: 10px;
-      height: 30px;
-    }
-
-    /* Service Cards */
-    .card-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin: 40px auto;
-      padding: 0 20px;
-      max-width: 1000px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 15px;
-      width: 250px;
-      text-align: center;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      transition: transform 0.3s;
-      color: inherit;
-    }
-
-    .card:hover {
-      transform: scale(1.05);
-    }
-
-    /* Get Quote Button */
-    .quote-btn {
-      display: block;
-      margin: 30px auto;
-      padding: 12px 25px;
-      background: #00c9a7;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      color: white;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .quote-btn:hover {
-      background: #00a58b;
-    }
-
-    /* Contact Form */
-    .contact-section {
-      padding: 40px 20px;
-      max-width: 600px;
-      margin: 40px auto;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .contact-section h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .contact-section input,
-    .contact-section textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-    }
-
-    .contact-section button {
-      padding: 12px 20px;
-      background: #00c9a7;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .contact-section button:hover {
-      background: #009f87;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 50px;
-      padding: 20px;
-      background: #111;
-      color: #ccc;
-    }
+    /* ... (aapka existing CSS yahan hoga, no change) ... */
   </style>
 </head>
 
@@ -220,10 +56,10 @@
   <!-- Contact Form -->
   <div id="contact" class="contact-section">
     <h2>Contact Us</h2>
-    <form onsubmit="submitForm(event)">
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="5" placeholder="Your Message" required></textarea>
+    <form action="https://formspree.io/f/mblyrlvv" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
   </div>
@@ -261,12 +97,6 @@
         i++;
         setTimeout(typeWriter, 50);
       }
-    }
-
-    // Contact form dummy
-    function submitForm(e) {
-      e.preventDefault();
-      alert("Message sent! (Demo only)");
     }
 
     window.onload = function () {
