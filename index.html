@@ -13,6 +13,10 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
     }
@@ -21,23 +25,11 @@
       text-align: center;
     }
 
-    /* THEMES */
-    body.light-theme {
-      background: #ffffff;
-      color: #000000;
-    }
+    /* Themes */
+    body.light-theme { background: #ffffff; color: #000000; }
+    body.dark-theme { background: linear-gradient(to right, #1f4037, #99f2c8); color: white; }
+    body.gamer-theme { background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white; }
 
-    body.dark-theme {
-      background: linear-gradient(to right, #1f4037, #99f2c8);
-      color: white;
-    }
-
-    body.gamer-theme {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-    }
-
-    /* THEME BUTTON */
     .theme-toggle-btn {
       position: fixed;
       top: 20px;
@@ -52,7 +44,7 @@
       z-index: 1000;
     }
 
-    /* NAVBAR */
+    /* Navbar */
     .navbar {
       position: fixed;
       top: 0;
@@ -73,20 +65,19 @@
       font-weight: bold;
     }
 
-    /* HEADER + TAGLINE */
+    /* Header Section */
     .header {
       padding-top: 80px;
       text-align: center;
     }
 
-    /* TYPING TEXT */
     #typing-text {
       font-size: 22px;
       margin-top: 10px;
       height: 30px;
     }
 
-    /* SERVICE CARDS */
+    /* Service Cards */
     .card-container {
       display: flex;
       justify-content: center;
@@ -113,7 +104,66 @@
       transform: scale(1.05);
     }
 
-    /* FOOTER */
+    /* Get Quote Button */
+    .quote-btn {
+      display: block;
+      margin: 30px auto;
+      padding: 12px 25px;
+      background: #00c9a7;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .quote-btn:hover {
+      background: #00a58b;
+    }
+
+    /* Contact Form */
+    .contact-section {
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .contact-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .contact-section input,
+    .contact-section textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .contact-section button {
+      padding: 12px 20px;
+      background: #00c9a7;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .contact-section button:hover {
+      background: #009f87;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
       margin-top: 50px;
@@ -125,20 +175,20 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
+  <!-- Navbar -->
   <div class="navbar">
     <div><strong>Decken Gamer</strong></div>
     <div>
       <a href="#">Home</a>
-      <a href="#">Services</a>
-      <a href="#">Contact</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
     </div>
   </div>
 
-  <!-- THEME TOGGLE -->
+  <!-- Theme Button -->
   <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 Theme</button>
 
-  <!-- HEADER -->
+  <!-- Header -->
   <div class="header">
     <h1>
       <img src="logo.png" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
@@ -148,8 +198,8 @@
     <h2 id="typing-text"></h2>
   </div>
 
-  <!-- SERVICE CARDS -->
-  <div class="card-container">
+  <!-- Services -->
+  <div id="services" class="card-container">
     <div class="card">
       <h3>Business Website</h3>
       <p>Professional websites for companies and startups.</p>
@@ -164,12 +214,26 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- Quote Button -->
+  <a href="#contact" class="quote-btn">Get a Quote</a>
+
+  <!-- Contact Form -->
+  <div id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <form onsubmit="submitForm(event)">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
   <footer>
     © 2025 Decken Web Design. All rights reserved.
   </footer>
 
-  <!-- JS: THEME + TYPING -->
+  <!-- JS -->
   <script>
     const themes = ['light-theme', 'dark-theme', 'gamer-theme'];
     const icons = ['🌞 Theme', '🌙 Theme', '🧪 Theme'];
@@ -188,17 +252,7 @@
       btn.innerHTML = icons[currentThemeIndex];
     }
 
-    window.onload = function () {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme && themes.includes(savedTheme)) {
-        currentThemeIndex = themes.indexOf(savedTheme);
-      }
-      document.body.classList.add(themes[currentThemeIndex]);
-      updateButtonIcon();
-      typeWriter(); // Start typing text
-    };
-
-    // Typing Effect
+    // Typing Text
     const text = "We Build Beautiful, Functional Websites.";
     let i = 0;
     function typeWriter() {
@@ -208,6 +262,22 @@
         setTimeout(typeWriter, 50);
       }
     }
+
+    // Contact form dummy
+    function submitForm(e) {
+      e.preventDefault();
+      alert("Message sent! (Demo only)");
+    }
+
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme && themes.includes(savedTheme)) {
+        currentThemeIndex = themes.indexOf(savedTheme);
+      }
+      document.body.classList.add(themes[currentThemeIndex]);
+      updateButtonIcon();
+      typeWriter();
+    };
   </script>
 </body>
 </html>
