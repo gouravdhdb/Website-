@@ -1,62 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-      <meta charset="UTF-8">
+<head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Decken Gamer</title>
+
   <style>
+    * {
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+
     .center-text {
       text-align: center;
     }
-  </style>
-    <style>
-  body.light-theme {
-    background: #ffffff;
-    color: #000000;
-  }
 
-  body.dark-theme {
-    background: linear-gradient(to right, #1f4037, #99f2c8);
-    color: white;
-  }
-
-  .theme-toggle-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 10px;
-    background: #444;
-    color: white;
-    cursor: pointer;
-  }
-    </style>
-  </head>
-  <button class="theme-toggle-btn" onclick="toggleTheme()">Toggle Theme</button>
-  <body style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: white;">
-  <script>
-  function toggleTheme() {
-    const body = document.body;
-    if (body.classList.contains('dark-theme')) {
-      body.classList.remove('dark-theme');
-      body.classList.add('light-theme');
-    } else {
-      body.classList.remove('light-theme');
-      body.classList.add('dark-theme');
+    /* Light Theme */
+    body.light-theme {
+      background: #ffffff;
+      color: #000000;
     }
-  }
 
-  // Optional: set default theme
-  document.body.classList.add('dark-theme');
+    /* Dark Theme */
+    body.dark-theme {
+      background: linear-gradient(to right, #1f4037, #99f2c8);
+      color: white;
+    }
+
+    /* Cyberpunk Theme */
+    body.cyberpunk-theme {
+      background: linear-gradient(to right, #ff0080, #7928ca);
+      color: #00ffe7;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Toggle Button */
+    .theme-toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 999;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle-btn" onclick="toggleTheme()">🌙 Theme</button>
+
+  <!-- Logo + Name -->
+  <br>
+  <h1 class="center-text">
+    <img src="logo.png" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+    Decken Gamer
+  </h1>
+
+  <!-- Tagline -->
+  <br>
+  <h3 class="center-text">Gourav | Gourav | Gourav</h3>
+
+  <!-- Theme Script -->
+  <script>
+    const themes = ['light-theme', 'dark-theme', 'cyberpunk-theme'];
+    const icons = ['🌞 Theme', '🌙 Theme', '🧪 Theme'];
+    let currentThemeIndex = 1;
+
+    function toggleTheme() {
+      document.body.classList.remove(themes[currentThemeIndex]);
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      document.body.classList.add(themes[currentThemeIndex]);
+      localStorage.setItem('theme', themes[currentThemeIndex]);
+      updateButtonIcon();
+    }
+
+    function updateButtonIcon() {
+      const btn = document.querySelector('.theme-toggle-btn');
+      btn.innerHTML = icons[currentThemeIndex];
+    }
+
+    // Load saved theme on page load
+    window.onload = function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme && themes.includes(savedTheme)) {
+        currentThemeIndex = themes.indexOf(savedTheme);
+      }
+      document.body.classList.add(themes[currentThemeIndex]);
+      updateButtonIcon();
+    };
   </script>
-  </body>
-  <body>
-    <br>
-    <h1 class="center-text"> <!-- Example -->
-  <img src="logo.png" alt="Logo" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
-Decken Gamer</h1>
-    <br>
-    <h3 class="center-text">Gourav|Gourav|Gourav</h3>
-  </body>
+</body>
 </html>
